@@ -1,0 +1,77 @@
+{% extends 'FinalBase.html' %}
+
+{% load static %}
+
+{% block title %} ثبت نام در سامانه {% endblock %}
+
+{% block content %}
+<div class="col-xl-4 col-md-12" style="direction: rtl;">
+    <div class="card per-task-card">
+        <div class="card-header">
+            <h5>فعالیت های شما</h5>
+        </div>
+        <div class="card-block">
+            <div class="row per-task-block text-center">
+                <div class="col-6">
+                    <div data-label="45%" class="radial-bar radial-bar-45 radial-bar-lg radial-bar-primary"></div>
+                    <h6 class="text-muted">تمام شده</h6>
+                    <p class="text-muted">642</p>
+                    <button class="btn btn-primary btn-round btn-sm">مدیریت</button>
+                </div>
+                <div class="col-6">
+                    <div data-label="30%" class="radial-bar radial-bar-30 radial-bar-lg radial-bar-primary"></div>
+                    <h6 class="text-muted">مانده</h6>
+                    <p class="text-muted">495</p>
+                    <button class="btn btn-primary btn-outline-primary btn-round btn-sm">مدیریت</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card feed-card">
+        <div class="card-header">
+            <h5>نزدیک به زمان تحویل</h5>
+            <div class="card-header-right">
+                <ul class="list-unstyled card-option">
+                    <li><i class="fa fa fa-wrench open-card-option"></i></li>
+                    <li><i class="fa fa-window-maximize full-card"></i></li>
+                    <li><i class="fa fa-minus minimize-card"></i></li>
+                    <li><i class="fa fa-refresh reload-card"></i></li>
+                    <li><i class="fa fa-trash close-card"></i></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-block">
+            <div class="row m-b-25">
+                <div class="col-auto p-r-0">
+                    <img src="{% static 'files/assets/images/mega-menu/01.jpg' %}" alt="" class="img-fluid img-50">
+    </div>
+    <div class="col">
+    <h6 class="m-b-5">New able - Redesign</h6>
+    <p class="text-c-pink m-b-0">2 Days Remaining</p>
+    </div>
+    </div>
+    <div class="row m-b-25">
+    <div class="col-auto p-r-0">
+    <img src="{% static 'files/assets/images/mega-menu/02.jpg' %}" alt="" class="img-fluid img-50">
+     </div>
+    <div class="col">
+    <h6 class="m-b-5">New Admin Dashboard</h6>
+    <p class="text-c-pink m-b-0">Proposal in 6 Days</p>
+    </div>
+    </div>
+    <div class="row m-b-25">
+    <div class="col-auto p-r-0">
+    <img src="{% static 'files/assets/images/mega-menu/03.jpg' %}" alt="" class="img-fluid img-50">
+    </div>
+    <div class="col">
+    <h6 class="m-b-5">Logo Design</h6>
+    <p class="text-c-green m-b-0">10 Days Remaining</p>
+    </div>
+    </div>
+    <div class="text-center">
+    <a href="#!" class="b-b-primary text-primary">همه موارد</a>
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}
