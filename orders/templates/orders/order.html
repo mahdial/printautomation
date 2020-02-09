@@ -44,43 +44,44 @@
         {{ order_form.CodeGhaleb|as_crispy_field }}
       </div>
       <div class="form-group col-md-1 col-3" style="margin-right: -5%;">
-        <button class="btn" type="button" data-toggle="modal" data-target="#CodeGHalebModal" style="margin-top: 37%;"><i class="fa fa-search"></i></button>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-4 col-4">
-        <label for="usr">طول جعبه</label>
-        <input type="text" class="form-control" id="tool">
-      </div>
-      <div class="form-group col-md-4 col-4">
-        <label for="usr">عرض جعبه</label>
-        <input type="text" class="form-control" id="arz">
-      </div>
-      <div class="form-group col-md-4 col-4">
-        <label for="usr">ارتفاع جعبه</label>
-        <input type="text" class="form-control" id="ertefa">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-4 col-4">
-        <label for="usr">تعداد در قالب</label>
-        <input type="text" class="form-control" id="tedad">
-      </div>
-      <div class="form-group col-md-4 col-4">
-        <label for="usr">طول شیت چاپی</label>
-        <input type="text" class="form-control" id="tsh">
-      </div>
-      <div class="form-group col-md-4 col-4">
-        <label for="usr">عرض شیت چاپی</label>
-        <input type="text" class="form-control" id="ash">
+        <button class="btn" onclick="" type="button" data-toggle="modal" data-target="#CodeGHalebModal" style="margin-top: 34%;"><i class="fa fa-search"></i></button>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-1 mb-0">
         <button type="submit" class="btn btn-primary" style="float: right;"> ذخیره </button>
       </div>
-    </div>
+    </div>    
   </form>
+
+  <div class="form-row">
+    <div class="form-group col-md-4 col-4">
+      <label for="usr">طول جعبه</label>
+      <input type="text" class="form-control" id="tool">
+    </div>
+    <div class="form-group col-md-4 col-4">
+      <label for="usr">عرض جعبه</label>
+      <input type="text" class="form-control" id="arz">
+    </div>
+    <div class="form-group col-md-4 col-4">
+      <label for="usr">ارتفاع جعبه</label>
+      <input type="text" class="form-control" id="ertefa">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4 col-4">
+      <label for="usr">تعداد در قالب</label>
+      <input type="text" class="form-control" id="tedad">
+    </div>
+    <div class="form-group col-md-4 col-4">
+      <label for="usr">طول شیت چاپی</label>
+      <input type="text" class="form-control" id="tsh">
+    </div>
+    <div class="form-group col-md-4 col-4">
+      <label for="usr">عرض شیت چاپی</label>
+      <input type="text" class="form-control" id="ash">
+    </div>
+  </div>
 
 </div>
 {% endblock %}
@@ -118,6 +119,8 @@
                 </th>                     
                 <th class="th-sm">فایل
                 </th>
+                <th class="th-sm">انتخاب
+                </th>                 
               </tr>
             </thead>
             <tbody>
@@ -130,7 +133,8 @@
                 <td>{{ temp.Arze_sheete_chapi }}</td>
                 <td>{{ temp.tedad_dar_ghaleb }}</td> 
                 <td>{{ temp.Boresh_pas_az_chap }}</td>               
-                <td>{{ temp.folder_link }}</td>               
+                <td>{{ temp.folder_link }}</td>      
+                <td><button type="button" id="{{ temp.id }}" class="btn btn-teal btn-rounded btn-sm m-0 buttonID"  data-dismiss="modal">انتخاب</button></td>         
               </tr>
 
               {% endfor %}
@@ -153,6 +157,8 @@
                 </th>                     
                 <th class="th-sm">فایل
                 </th>
+                <th class="th-sm">انتخاب
+                </th>                
               </tr>
             </tfoot>
           </table>
@@ -203,15 +209,20 @@
     },
     {
         targets: 7,
-        className: 'dt-head-center dt-body-ritgh'
+        className: 'dt-head-center'
+    },
+    {
+        targets: 8,
+        className: 'dt-head-center'
     },
       { "width": "32px", "targets": 0 },
-      { "width": "70px", "targets": 1 },
+      { "width": "50px", "targets": 1 },
       { "width": "85px", "targets": 2 },
       { "width": "85px", "targets": 3 },
       { "width": "85px", "targets": 4 },
       { "width": "75px", "targets": 5 },
       { "width": "85px", "targets": 6 },
+      { "width": "25px", "targets": 8 },
     ]    
 } );
     $('.dataTables_length').addClass('bs-select');
@@ -254,5 +265,44 @@
 
   $(".sel-table>tbody").selectable({ filter: 'tr' });
 
+
+    $(".buttonID").click(function() {
+        //alert(this.id); // or alert($(this).attr('id'));
+        bid = this.id;
+        $.ajax({
+        url: '/orders/api/get_template/',
+        data: {
+          'bid': bid
+        },
+        dataType: 'json',
+        success: function (data) {
+          $.each(data, function(key, value){
+            if (key == 'tj') {
+              $("#tool").val(value)
+            }
+            if (key == 'aj') {
+              $("#arz").val(value)
+            }
+            if (key == 'ej') {
+              $("#ertefa").val(value)
+            }
+            if (key == 'td') {
+              $("#tedad").val(value)
+            }
+            if (key == 'aaj') {
+              $("#tsh").val(value)
+            }
+            if (key == 'eej') {
+              $("#ash").val(value)
+            }               
+            if (key == 'cga') {
+              $("#id_CodeGhaleb").val(value)
+            }                        
+          });
+
+        }
+      });
+    });
+  
 </script>
 {% endblock %}

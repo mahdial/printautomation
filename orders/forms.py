@@ -13,4 +13,5 @@ class Order_Form(ModelForm):
             'Name_Moshtari': forms.TextInput(attrs={'class': 'AutoComp'}),
             'Daste_Mahsool': forms.TextInput(attrs={'class': 'AutoComp'}),
             'MavadAvaliye1': forms.TextInput(attrs={'class': 'AutoComp'}),
+            'CodeGhaleb': forms.TextInput(attrs={'class': 'AutoComp'}),
         }

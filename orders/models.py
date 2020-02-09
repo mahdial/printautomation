@@ -117,6 +117,7 @@ class Templates(models.Model):
     masahat_taki = models.CharField(max_length=35)
     folder_link = models.CharField(max_length=100)
     Name_mahsool = models.CharField(max_length=150)
+    img = models.ImageField
 
     def __str__(self):
         return self.Formoole_name_mahsool
