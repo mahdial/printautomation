@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import *
-
+from account.models import *
 
 admin.site.register(WorkStations)
 admin.site.register(orders)

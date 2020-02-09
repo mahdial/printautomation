@@ -6,8 +6,15 @@ from django.shortcuts import redirect
 from django.contrib.auth import logout
 
 EXEMPT_URLS = [re.compile(settings.LOGIN_URL.lstrip('/'))]
-if hasattr(settings, 'LOGIN_EXEMPT_URLS'):
-    EXEMPT_URLS += [re.compile(url) for url in settings.LOGIN_EXEMPT_URLS]
+EXEMPT_URLS += [re.compile(settings.ADMINS_URL)]
+EXEMPT_URLS += [re.compile(settings.SIGNUP_URL)]
+
+print(EXEMPT_URLS)
+
+# if hasattr(settings, 'LOGIN_EXEMPT_URLS'):
+print('------------------------------------------------------------------')
+#     EXEMPT_URLS += [re.compile(url) for url in settings.LOGIN_EXEMPT_URLS]
+#     print(EXEMPT_URLS)
 
 class LoginRequiredMiddleware:
 

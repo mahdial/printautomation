@@ -1,0 +1,258 @@
+{% extends 'FinalBase.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load UtilTags %}
+
+{% block title %} سفارشات {% endblock %}
+{% block content %}
+<div class="container" style="direction: rtl;">
+  <!-- <p>تاریخ عضویت : {{ JoinDateJalali }}</p> -->
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ order_form.Name_Moshtari|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ order_form.Name_Project|as_crispy_field }}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4 mb-0">
+        {{ order_form.Daste_Mahsool|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-4 mb-0">
+        {{ order_form.NoeFactor|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-4 mb-0">
+        {{ order_form.Tirazh|as_crispy_field }}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ order_form.IsBehdashti|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ order_form.MavadAvaliye1|as_crispy_field }}
+      </div>
+    </div>
+    {{ order_form.SharheMavadAvaliye1|as_crispy_field }}
+    <div class="form-row">
+      <div class="form-group col-md-3 col-9">
+        {{ order_form.CodeGhaleb|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-1 col-3" style="margin-right: -5%;">
+        <button class="btn" type="button" data-toggle="modal" data-target="#CodeGHalebModal" style="margin-top: 37%;"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4 col-4">
+        <label for="usr">طول جعبه</label>
+        <input type="text" class="form-control" id="tool">
+      </div>
+      <div class="form-group col-md-4 col-4">
+        <label for="usr">عرض جعبه</label>
+        <input type="text" class="form-control" id="arz">
+      </div>
+      <div class="form-group col-md-4 col-4">
+        <label for="usr">ارتفاع جعبه</label>
+        <input type="text" class="form-control" id="ertefa">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4 col-4">
+        <label for="usr">تعداد در قالب</label>
+        <input type="text" class="form-control" id="tedad">
+      </div>
+      <div class="form-group col-md-4 col-4">
+        <label for="usr">طول شیت چاپی</label>
+        <input type="text" class="form-control" id="tsh">
+      </div>
+      <div class="form-group col-md-4 col-4">
+        <label for="usr">عرض شیت چاپی</label>
+        <input type="text" class="form-control" id="ash">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-1 mb-0">
+        <button type="submit" class="btn btn-primary" style="float: right;"> ذخیره </button>
+      </div>
+    </div>
+  </form>
+
+</div>
+{% endblock %}
+{% block modalBox %}
+  <!-- The Modal -->
+  <div class="modal fade" id="CodeGHalebModal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">کد قالب</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="responsive-table"></div>
+          <table id="dtBasicExample" class="dataTableLayout table table-striped table-bordered table-sm" cellspacing="0">
+            <thead>
+              <tr>
+                <th class="th-sm">شماره
+                </th>                
+                <th class="th-sm">کد قالب
+                </th>
+                <th class="th-sm">برش پیش از چاپ
+                </th>                
+                <th class="th-sm">طول شیت چاپی
+                </th>
+                <th class="th-sm">عرض شیت چاپی
+                </th>
+                <th class="th-sm">تعداد در قالب
+                </th>
+                <th class="th-sm">برش پس از چاپ
+                </th>                     
+                <th class="th-sm">فایل
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for temp in TemplatesAll %}
+              <tr>
+                <td>{{ temp.id }}</td>
+                <td>{{ temp.Code_ghalebe_asli }}</td>
+                <td>{{ temp.Boresh_pish_az_Chap }}</td>
+                <td>{{ temp.Toole_Sheete_Chapi }}</td>
+                <td>{{ temp.Arze_sheete_chapi }}</td>
+                <td>{{ temp.tedad_dar_ghaleb }}</td> 
+                <td>{{ temp.Boresh_pas_az_chap }}</td>               
+                <td>{{ temp.folder_link }}</td>               
+              </tr>
+
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th class="th-sm">شماره
+                </th>
+                <th class="th-sm">کد قالب
+                </th>
+                <th class="th-sm">برش پیش از چاپ
+                </th>                
+                <th class="th-sm">طول شیت چاپی
+                </th>
+                <th class="th-sm">عرض شیت چاپی
+                </th>
+                <th class="th-sm">تعداد در قالب
+                </th>
+                <th class="th-sm">برش پس از چاپ
+                </th>                     
+                <th class="th-sm">فایل
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+        </div>
+      </div>
+    </div>
+
+<script>
+  $(document).ready(function () {
+    BindControls();
+    $('#dtBasicExample').DataTable( {
+      "autoWidth" : false,
+    select: true,
+    "columnDefs": [
+    {
+        targets: 0,
+        className: 'dt-head-center dt-body-center'
+    },
+    {
+        targets: 1,
+        className: 'dt-head-center dt-body-center'
+    },
+    {
+        targets: 2,
+        className: 'dt-head-center dt-body-center'
+    },
+    {
+        targets: 3,
+        className: 'dt-head-center dt-body-center'
+    },
+    {
+        targets: 4,
+        className: 'dt-head-center dt-body-center'
+    },
+    {
+        targets: 5,
+        className: 'dt-head-center dt-body-center'
+    },
+    {
+        targets: 6,
+        className: 'dt-head-center dt-body-center'
+    },
+    {
+        targets: 7,
+        className: 'dt-head-center dt-body-ritgh'
+    },
+      { "width": "32px", "targets": 0 },
+      { "width": "70px", "targets": 1 },
+      { "width": "85px", "targets": 2 },
+      { "width": "85px", "targets": 3 },
+      { "width": "85px", "targets": 4 },
+      { "width": "75px", "targets": 5 },
+      { "width": "85px", "targets": 6 },
+    ]    
+} );
+    $('.dataTables_length').addClass('bs-select');
+  });
+
+  // $('#CodeGHalebModal').on('shown.bs.modal', function () {
+  //   var tbl = $('#dtBasicExample').DataTable( {
+  //     "autoWidth": false,
+  //     select: true
+  //   } );    
+  //   tbl.columns.adjust().draw();
+  // });    
+
+  function BindControls() {
+    src = "/orders/api/get_places/"
+    $(".AutoComp").autocomplete({
+      source: function (request, response) {
+        $.ajax({
+          url: src,
+          dataType: "json",
+          data: {
+            term: request.term,
+            elementname: $(this.element).prop("id")
+          },
+          success: function (data) {
+            response(data);
+          }
+        });
+      },
+      select: function (event, ui) { //item selected
+        AutoCompleteSelectHandler(event, ui)
+      },
+      minLength: 1,
+    });
+  };
+
+  function AutoCompleteSelectHandler(event, ui) {
+    var selectedObj = ui.item;
+  }
+
+  $(".sel-table>tbody").selectable({ filter: 'tr' });
+
+</script>
+{% endblock %}

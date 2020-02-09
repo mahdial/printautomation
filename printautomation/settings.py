@@ -1,4 +1,7 @@
 import os
+# LANGUAGE_CODE = 'fa-ir'
+# import locale
+# locale.setlocale(locale.LC_ALL, "fa_IR.UTF-8")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,11 +28,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'jalali_date',
     'account',
     'dashboard',
     'orders',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # defaults
 JALALI_DATE_DEFAULTS = {
@@ -157,10 +163,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/account/ulogin/'
 LOGIN_URL = '/account/ulogin/'
+ADMINS_URL = '/admin/'
+SIGNUP_URL = '/account/signup/'
 
-LOGIN_EXEMPT_URLS = {
-    '/account/logout/',
-    '/account/account/',
-    '/admin/',
-} 
+# LOGIN_EXEMPT_URLS = {
+#     'account/logout/',
+#     'account/signup/',
+#     'orders/',
+# } 
 

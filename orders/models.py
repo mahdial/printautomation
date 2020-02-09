@@ -1,180 +1,175 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Material(models.Model):
+    CodeKala = models.IntegerField(null=False)
+    NameKala = models.CharField(max_length=140)
+    Vahed1 = models.CharField(max_length=40)
+    Vahed2 = models.CharField(max_length=40)
+    NameGorooheKalayi = models.CharField(max_length=140)
+    NameMadareGoroohiyeKala = models.CharField(max_length=50, null=True)
+    Gramazh = models.IntegerField(null=False)
+    ZaribeDoVahed = models.IntegerField(null=False, default=0)
+    Arz = models.IntegerField(null=False)
+    Tool = models.IntegerField(null=False)
+    CodeZirGorooheKalayi = models.IntegerField(null=False)
+
+    def __str__(self):
+        return self.NameKala
+
+    def __unicode__(self):
+        return u'%s' % (self.NameKala)    
+
+
+class DasteMahsool(models.Model):
+    CodeMahsool = models.IntegerField(null=False)   
+    DasteMahsool = models.CharField(max_length=110)
+    VahedShomaresh = models.CharField(max_length=30)     
+
+    def __str__(self):
+        return self.DasteMahsool
+
+    def __unicode__(self):
+        return u'%s' % (self.DasteMahsool)    
+
+class customers(models.Model):
+    shomare_yekta = models.IntegerField(null=False)
+    code_tafzili_shenavar = models.IntegerField(null=True)
+    name_tafzili_shenavar = models.CharField(max_length=110)
+    mande_hesab = models.DecimalField(max_digits=15, decimal_places=1)
+    tozihat_hesab = models.CharField(max_length=255)
+    tarikh_ijad = models.DateTimeField(auto_now_add=True)
+    tarikh_akharin_taghir = models.DateTimeField(auto_now=True)
+    tel1 = models.CharField(max_length=20)
+    tel2 = models.CharField(max_length=20)
+    fax = models.CharField(max_length=20)
+    email = models.EmailField(max_length=150)
+    Web = models.CharField(max_length=55)
+    addres1 = models.CharField(max_length=190)
+    addres2 = models.CharField(max_length=190)
+    shahr = models.CharField(max_length=40)
+    ostan = models.CharField(max_length=40)
+    code_posti = models.IntegerField(null=True)
+    keshvar = models.CharField(max_length=40)
+    code_eghtesadi = models.CharField(max_length=25)
+    telex = models.CharField(max_length=20)
+    onvan = models.CharField(max_length=25)
+    mobile = models.CharField(max_length=30)
+    shomare_hesabe_banki1 = models.CharField(max_length=40)
+    shomare_hesabe_banki2 = models.CharField(max_length=40)
+    tarikh_tavalod = models.DateTimeField(auto_now_add=False, auto_now=False)
+    noe_hesab = models.CharField(max_length=30)
+    noe_kharidar_forooshande_dar_darayi = models.CharField(max_length=40)
+    code_meli = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.name_tafzili_shenavar
+
+    def __unicode__(self):
+        return u'%s' % (self.name_tafzili_shenavar)      
+
+
+class Templates(models.Model):    
+    Code_mahsool = models.IntegerField(null=True)
+    Code_ghalebe_asli = models.CharField(max_length=40)
+    Daste_mahsool_L = models.ForeignKey(DasteMahsool, on_delete=models.CASCADE, default=None, null=True)
+    Daste_mahsool = models.CharField(max_length=140)
+
+    Brand_CHOICES = (
+        ('B', 'برونسی'),
+        ('K', 'بلوکات'),
+    )
+    Brand = models.CharField(max_length=10, choices=Brand_CHOICES)
+
+    Name = models.CharField(max_length=25)
+    Material_l = models.ForeignKey(Material, on_delete=models.CASCADE, default=None, null=True)
+    Material = models.CharField(max_length=140)
+    tool_arz_ertefa = models.CharField(max_length=50)
+    Formoole_name_mahsool = models.CharField(max_length=130)
+    Name_mahsoole_asli = models.CharField(max_length=100)
+    Toole_kaghaz = models.CharField(max_length=12)
+    Arze_kaghaz = models.CharField(max_length=12)
+    Boresh_pish_az_Chap = models.CharField(max_length=4)
+    Toole_Sheete_Chapi = models.CharField(max_length=12)
+    Arze_sheete_chapi = models.CharField(max_length=12)
+    Boresh_pas_az_chap = models.CharField(max_length=4)
+    Toole_varagh = models.DecimalField(max_digits=7, decimal_places=2)
+    Arze_varagh = models.DecimalField(max_digits=7, decimal_places=2)
+    Toole_single = models.DecimalField(max_digits=7, decimal_places=2)
+    Arze_single = models.DecimalField(max_digits=7, decimal_places=2)
+    Toole_maghzi = models.IntegerField(null=True,default=0)
+    Arze_maghzi = models.IntegerField(null=True,default=0)
+    toole_sheete_dicut = models.CharField(max_length=8)
+    arze_sheete_dicut = models.CharField(max_length=8)
+    dastgah_chap = models.CharField(max_length=20)
+    dastgah_dicut = models.CharField(max_length=10)
+    chasb = models.CharField(max_length=25)
+    baste_bandi = models.CharField(max_length=25)
+    tedad_dar_baste = models.IntegerField(null=True)
+    toole_tigh_be_tigh = models.DecimalField(max_digits=5, decimal_places=2)
+    arze_tigh_be_tigh = models.DecimalField(max_digits=5, decimal_places=2)
+    toole_mahsool = models.DecimalField(max_digits=5, decimal_places=2)
+    arze_mahsool = models.DecimalField(max_digits=5, decimal_places=2)
+    ertefa_mahsool = models.DecimalField(max_digits=5, decimal_places=2)
+    toole_gostarde = models.DecimalField(max_digits=5, decimal_places=2)
+    arze_gostarde = models.DecimalField(max_digits=5, decimal_places=2)
+    tedad_dar_ghaleb = models.IntegerField(null=True)
+    masahat_taki = models.CharField(max_length=35)
+    folder_link = models.CharField(max_length=100)
+    Name_mahsool = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.Formoole_name_mahsool
+
+    def __unicode__(self):
+        return u'%s' % (self.Formoole_name_mahsool)     
 
 class WorkStations(models.Model):
     WorkStationName = models.CharField(max_length=150)
 
-
-class orders(models.Model):
-    EsmeProject = models.CharField(max_length=300)
-    TooleJabeh = models.CharField(max_length=150)
-    ArzeJabeh = models.CharField(max_length=150)
-    ErtefaeJabeh = models.CharField(max_length=150)
-    TedadeRang = models.CharField(max_length=150)
-
-    NobateChap_CHOICES = (
-        ('A', 'اول'),
-        ('T', 'تکرار'),
-    )
-    NobateChap = models.CharField(max_length=20, choices=NobateChap_CHOICES)
-
-    NoeChap_CHOICES = (
-        ('O', 'افست'),
-        ('F', 'فلکسو'),
-        ('LS', 'لمینیت '),
-        ('LV', 'تکرار'),
-    )
-    NoeChap = models.CharField(max_length=20, choices=NoeChap_CHOICES)
-
-    MavadAvvaliye1_CHOICES = (
-        ('T', 'تحریر'),
-        ('G', 'گلاسه'),
-        ('K', 'کرافت '),
-        ('M', 'مومی'),
-        ('PC', 'پشت چسبدار'),
-        ('IB', 'ایندربرد'),
-        ('PT', 'پشت طوسی '),
-        ('D', 'دوپلکس'),
-        ('V3', 'ورق 3 لایه'),
-        ('V5', 'ورق 5 لایه'),
-        ('TK', 'ترکیبی '),
-    )
-    MavadAvvaliye1 = models.CharField(
-        max_length=20, choices=MavadAvvaliye1_CHOICES)
-
-    MavadAvvaliye2_CHOICES = (
-        ('S', 'سینگل'),
-        ('V', 'ورق'),
-    )
-    MavadAvvaliye2 = models.CharField(
-        max_length=20, choices=MavadAvvaliye2_CHOICES)
-
-    MavadAvvaliye3_CHOICES = (
-        ('T', 'تحریر'),
-        ('G', 'گلاسه'),
-        ('K', 'کرافت '),
-        ('M', 'مومی'),
-        ('PC', 'پشت چسبدار'),
-        ('IB', 'ایندربرد'),
-        ('PT', 'پشت طوسی '),
-        ('D', 'دوپلکس'),
-        ('V3', 'ورق 3 لایه'),
-        ('V5', 'ورق 5 لایه'),
-        ('S', 'سینگل'),
-        ('V', 'ورق'),
-    )
-    MavadAvvaliye3 = models.CharField(
-        max_length=20, choices=MavadAvvaliye3_CHOICES)
-
-    MavadAvvaliye4_CHOICES = (
-        ('T', 'تحریر'),
-        ('G', 'گلاسه'),
-        ('K', 'کرافت '),
-        ('M', 'مومی'),
-        ('PC', 'پشت چسبدار'),
-        ('IB', 'ایندربرد'),
-        ('PT', 'پشت طوسی '),
-        ('D', 'دوپلکس'),
-        ('V3', 'ورق 3 لایه'),
-        ('V5', 'ورق 5 لایه'),
-        ('S', 'سینگل'),
-        ('V', 'ورق'),
-    )
-    MavadAvvaliye4 = models.CharField(
-        max_length=20, choices=MavadAvvaliye4_CHOICES)
-
-    Behdashti_CHOICES = (
-        ('O', 'بهداشتی'),
-        ('F', 'غیر بهداشتی'),
-    )
-    Behdashti = models.CharField(max_length=20, choices=Behdashti_CHOICES)
-
-    Rol_CHOICES = (
-        ('O', 'رول'),
-        ('F', 'غیر رول'),
-    )
-    Rol = models.CharField(max_length=20, choices=Rol_CHOICES)
-
-    TarahiGraphici_CHOICES = (
-        ('O', 'طراحی گرافیکی دارد'),
-        ('F', 'طراحی گرافیکی ندارد'),
-    )
-    TarahiGraphici = models.CharField(
-        max_length=20, choices=TarahiGraphici_CHOICES)
-
-    TarrahiStructure_CHOICES = (
-        ('O', 'طراحی استراکچر دارد'),
-        ('F', 'طراحی استراکچر ندارد'),
-    )
-    TarrahiStructure = models.CharField(
-        max_length=20, choices=TarrahiStructure_CHOICES)
-
-    NemooneSazi_CHOICES = (
-        ('O', 'نمونه سازی دارد'),
-        ('F', 'نمونه سازی ندارد'),
-    )
-    NemooneSazi = models.CharField(max_length=20, choices=NemooneSazi_CHOICES)
-
-    Axasi_CHOICES = (
-        ('O', 'عکاسی دارد'),
-        ('F', 'عکاسی ندارد'),
-    )
-    Axasi = models.CharField(max_length=20, choices=Axasi_CHOICES)
-
-    Ghaleb_CHOICES = (
-        ('O', 'قالب دارد'),
-        ('F', 'قالب ندارد'),
-    )
-    Ghaleb = models.CharField(max_length=20, choices=Ghaleb_CHOICES)
-
-    NemooneMahsool_CHOICES = (
-        ('O', 'نمونه محصول دارد'),
-        ('F', 'نمونه محصول ندارد'),
-    )
-    NemooneMahsool = models.CharField(
-        max_length=20, choices=NemooneMahsool_CHOICES)
-
-    NemooneBasteBandi_CHOICES = (
-        ('O', 'نمونه بسته بندی دارد'),
-        ('F', 'نمونه بسته بندی ندارد'),
-    )
-    NemooneBasteBandi = models.CharField(
-        max_length=20, choices=NemooneBasteBandi_CHOICES)
-
-    Celiphone_CHOICES = (
-        ('O', 'سلفون دارد'),
-        ('F', 'سلفون ندارد'),
-    )
-    Celiphone = models.CharField(max_length=20, choices=Celiphone_CHOICES)
-
-    UV_CHOICES = (
-        ('O', 'یو وی دارد'),
-        ('F', 'یو وی ندارد'),
-    )
-    UV = models.CharField(max_length=20, choices=UV_CHOICES)
-
-    Verni_CHOICES = (
-        ('O', 'ورنی دارد'),
-        ('F', 'ورنی ندارد'),
-    )
-    Verni = models.CharField(max_length=20, choices=Verni_CHOICES)
-
-    TedadDarGhaleb = models.CharField(max_length=150)
-    SharheMavadAvaliye1 = models.CharField(max_length=300)
-    SharheMavadAvaliye2 = models.CharField(max_length=300)
-    SharheMavadAvaliye3 = models.CharField(max_length=300)
-    SharheMavadAvaliye4 = models.CharField(max_length=300)
-    ShomareSefaresh = models.CharField(max_length=30)
-    ArzeShitChapi = models.CharField(max_length=150)
-    TooleShitChapi = models.CharField(max_length=150)
-    ShomareHavale = models.CharField(max_length=30)
-
     def __str__(self):
-        return self.EsmeProject
+        return self.Formoole_name_mahsool
 
     def __unicode__(self):
-        return u'%s' % (self.EsmeProject)
+        return u'%s' % (self.Formoole_name_mahsool)   
+
+
+class orders(models.Model):
+    Name_Moshtari = models.ForeignKey(
+        customers, on_delete=models.CASCADE, default=None, verbose_name="نام مشتری")
+
+    Name_Project = models.CharField(max_length=150, verbose_name="نام پروژه")
+    
+    Daste_Mahsool = models.ForeignKey(
+        DasteMahsool, on_delete=models.CASCADE, default=None, verbose_name="دسته محصول")
+
+    NoeFactore_Choice = (
+        ('R', 'رسمی'),
+        ('G', 'غیر رسمی'),
+    )
+    NoeFactor = models.CharField(max_length=12, choices=NoeFactore_Choice, verbose_name="نوع فاکتور")
+
+    Tirazh = models.IntegerField(null=False, verbose_name="تیراژ")
+    MavadAvaliye1 = models.ForeignKey(
+        Material, on_delete=models.CASCADE, default=None, verbose_name="مواد اولیه")
+    SharheMavadAvaliye1 = models.CharField(max_length=300, verbose_name="شرح مواد اولیه")
+
+    IsBehdashti_Choice = (
+        ('B', 'بهداشتی'),
+        ('G', 'غیر بهداشتی'),
+    )
+    IsBehdashti = models.CharField(max_length=12, choices=IsBehdashti_Choice, verbose_name="بهداشتی یا غیر بهداشتی؟")
+    
+    CodeGhaleb = models.ForeignKey(
+        Templates, on_delete=models.CASCADE, default=None, verbose_name="کد قالب")
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+
+    def __str__(self):
+        return self.Name_Project
+
+    def __unicode__(self):
+        return u'%s' % (self.Name_Project)
 
 
 class OrderAttachments(models.Model):
@@ -184,21 +179,6 @@ class OrderAttachments(models.Model):
         orders, on_delete=models.CASCADE, default=None, related_name='Attachs2Order')
     ws = models.ForeignKey(
         WorkStations, on_delete=models.CASCADE, default=None)
-
-
-class ProfileDetail(models.Model):
-    tell = models.CharField(max_length=150)
-    birthday = models.DateTimeField(auto_now_add=False)
-    img = models.ImageField(default='default.png', blank=True)
-    madarek1 = models.ImageField(default='default.png', blank=True)
-    madarek2 = models.ImageField(default='default.png', blank=True)
-    madarek3 = models.ImageField(default='default.png', blank=True)
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name='ProfileDetail2User')
-
-    def __str__(self):
-        return 'Profile for user {}'.format(self.user.username)
-
 
 class UserProject(models.Model):
     LastWork = models.TextField(null=False)
@@ -211,6 +191,12 @@ class Comment(models.Model):
     order = models.ForeignKey(orders, on_delete=models.CASCADE, default=None)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
+    def __str__(self):
+        return self.Message
+
+    def __unicode__(self):
+        return u'%s' % (self.Message)       
+
 
 class Notifications(models.Model):
     Message = models.TextField(null=False)
@@ -222,29 +208,10 @@ class Notifications(models.Model):
     R_S = models.CharField(max_length=10, choices=R_S_CHOICES)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
-class Material(models.Model):
-    CodeKala = models.IntegerField(null=False)
-    NameKala = models.CharField(max_length=140)
-    Vahed1 = models.CharField(max_length=40)
-    Vahed2 = models.CharField(max_length=40)
-    NameGorooheKalayi = models.CharField(max_length=140)
-    Gramazh = models.IntegerField(null=False)
-    ZaribeDoVahed = models.IntegerField(null=False, default=0)
-    Arz = models.IntegerField(null=False)
-    Tool = models.IntegerField(null=False)
-    CodeZirGorooheKalayi = models.IntegerField(null=False)
+    def __str__(self):
+        return self.Message
 
-class DasteMahsool(models.Model):
-    CodeMahsool = models.IntegerField(null=False)   
-    DasteMahsool = models.CharField(max_length=110)
-    VahedShomaresh = models.CharField(max_length=30)
-
-class customers(models.Model):
-    CodeYekta = models.IntegerField(null=False)
-    CodeTafziliShenavar = models.IntegerField(null=False) 
-    NameTafziliShenavar = models.CharField(max_length=220)
-    MandeTafzili = models.BigIntegerField(null=False, default=0)
-    TarikheIjad = models.DateTimeField()
+    def __unicode__(self):
+        return u'%s' % (self.Message)       
 
 
-    
