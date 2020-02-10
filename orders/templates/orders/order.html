@@ -44,14 +44,15 @@
         {{ order_form.CodeGhaleb|as_crispy_field }}
       </div>
       <div class="form-group col-md-1 col-3" style="margin-right: -5%;">
-        <button class="btn" onclick="" type="button" data-toggle="modal" data-target="#CodeGHalebModal" style="margin-top: 34%;"><i class="fa fa-search"></i></button>
+        <button class="btn" type="button" data-toggle="modal" data-target="#CodeGHalebModal"
+          style="margin-top: 34%;"><i class="fa fa-search"></i></button>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-1 mb-0">
         <button type="submit" class="btn btn-primary" style="float: right;"> ذخیره </button>
       </div>
-    </div>    
+    </div>
   </form>
 
   <div class="form-row">
@@ -86,147 +87,148 @@
 </div>
 {% endblock %}
 {% block modalBox %}
-  <!-- The Modal -->
-  <div class="modal fade" id="CodeGHalebModal">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
+<!-- The Modal -->
+<div class="modal fade" id="CodeGHalebModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
 
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">کد قالب</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">کد قالب</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
 
-        <!-- Modal body -->
-        <div class="modal-body">
-          <div class="responsive-table"></div>
-          <table id="dtBasicExample" class="dataTableLayout table table-striped table-bordered table-sm" cellspacing="0">
-            <thead>
-              <tr>
-                <th class="th-sm">شماره
-                </th>                
-                <th class="th-sm">کد قالب
-                </th>
-                <th class="th-sm">برش پیش از چاپ
-                </th>                
-                <th class="th-sm">طول شیت چاپی
-                </th>
-                <th class="th-sm">عرض شیت چاپی
-                </th>
-                <th class="th-sm">تعداد در قالب
-                </th>
-                <th class="th-sm">برش پس از چاپ
-                </th>                     
-                <th class="th-sm">فایل
-                </th>
-                <th class="th-sm">انتخاب
-                </th>                 
-              </tr>
-            </thead>
-            <tbody>
-              {% for temp in TemplatesAll %}
-              <tr>
-                <td>{{ temp.id }}</td>
-                <td>{{ temp.Code_ghalebe_asli }}</td>
-                <td>{{ temp.Boresh_pish_az_Chap }}</td>
-                <td>{{ temp.Toole_Sheete_Chapi }}</td>
-                <td>{{ temp.Arze_sheete_chapi }}</td>
-                <td>{{ temp.tedad_dar_ghaleb }}</td> 
-                <td>{{ temp.Boresh_pas_az_chap }}</td>               
-                <td>{{ temp.folder_link }}</td>      
-                <td><button type="button" id="{{ temp.id }}" class="btn btn-teal btn-rounded btn-sm m-0 buttonID"  data-dismiss="modal">انتخاب</button></td>         
-              </tr>
-
-              {% endfor %}
-            </tbody>
-            <tfoot>
-              <tr>
-                <th class="th-sm">شماره
-                </th>
-                <th class="th-sm">کد قالب
-                </th>
-                <th class="th-sm">برش پیش از چاپ
-                </th>                
-                <th class="th-sm">طول شیت چاپی
-                </th>
-                <th class="th-sm">عرض شیت چاپی
-                </th>
-                <th class="th-sm">تعداد در قالب
-                </th>
-                <th class="th-sm">برش پس از چاپ
-                </th>                     
-                <th class="th-sm">فایل
-                </th>
-                <th class="th-sm">انتخاب
-                </th>                
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-        </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="responsive-table"></div>
+        <table id="dtBasicExample" class="dataTableLayout table table-striped table-bordered table-sm" cellspacing="0">
+          <thead>
+            <tr>
+              <th class="th-sm">شماره
+              </th>
+              <th class="th-sm">کد قالب
+              </th>
+              <th class="th-sm">برش پیش از چاپ
+              </th>
+              <th class="th-sm">طول شیت چاپی
+              </th>
+              <th class="th-sm">عرض شیت چاپی
+              </th>
+              <th class="th-sm">تعداد در قالب
+              </th>
+              <th class="th-sm">برش پس از چاپ
+              </th>
+              <th class="th-sm">فایل
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th class="th-sm">شماره
+              </th>
+              <th class="th-sm">کد قالب
+              </th>
+              <th class="th-sm">برش پیش از چاپ
+              </th>
+              <th class="th-sm">طول شیت چاپی
+              </th>
+              <th class="th-sm">عرض شیت چاپی
+              </th>
+              <th class="th-sm">تعداد در قالب
+              </th>
+              <th class="th-sm">برش پس از چاپ
+              </th>
+              <th class="th-sm">فایل
+              </th>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+    </div>
+  </div>
+</div>
 
 <script>
   $(document).ready(function () {
     BindControls();
-    $('#dtBasicExample').DataTable( {
-      "autoWidth" : false,
-    select: true,
-    "columnDefs": [
-    {
-        targets: 0,
-        className: 'dt-head-center dt-body-center'
-    },
-    {
-        targets: 1,
-        className: 'dt-head-center dt-body-center'
-    },
-    {
-        targets: 2,
-        className: 'dt-head-center dt-body-center'
-    },
-    {
-        targets: 3,
-        className: 'dt-head-center dt-body-center'
-    },
-    {
-        targets: 4,
-        className: 'dt-head-center dt-body-center'
-    },
-    {
-        targets: 5,
-        className: 'dt-head-center dt-body-center'
-    },
-    {
-        targets: 6,
-        className: 'dt-head-center dt-body-center'
-    },
-    {
-        targets: 7,
-        className: 'dt-head-center'
-    },
-    {
-        targets: 8,
-        className: 'dt-head-center'
-    },
-      { "width": "32px", "targets": 0 },
-      { "width": "50px", "targets": 1 },
-      { "width": "85px", "targets": 2 },
-      { "width": "85px", "targets": 3 },
-      { "width": "85px", "targets": 4 },
-      { "width": "75px", "targets": 5 },
-      { "width": "85px", "targets": 6 },
-      { "width": "25px", "targets": 8 },
-    ]    
-} );
-    $('.dataTables_length').addClass('bs-select');
+  $('#id_Daste_Mahsool').focusout(function() {
+      $('#dtBasicExample').DataTable({
+        "processing": true,
+        "serverSide": true,      
+        "ajax": {
+          processData: true,
+               dataType: 'json',
+               "url": "/orders/api/templatestojason/",
+               dataSrc:"",
+                data: {
+                  dastemahsool: $('#id_Daste_Mahsool').val()
+                },
+        },
+        "columns": [
+          { "data": "id" },
+          { "data": "Code_ghalebe_asli" },
+          { "data": "Boresh_pish_az_Chap" },
+          { "data": "Toole_Sheete_Chapi" },
+          { "data": "Arze_sheete_chapi" },
+          { "data": "tedad_dar_ghaleb" },
+          { "data": "Boresh_pas_az_chap" },
+          { "data": "folder_link" },
+        ],
+        "autoWidth": false,
+        select: true,
+        "columnDefs": [
+          {
+            targets: 0,
+            className: 'dt-head-center dt-body-center'
+          },
+          {
+            targets: 1,
+            className: 'dt-head-center dt-body-center'
+          },
+          {
+            targets: 2,
+            className: 'dt-head-center dt-body-center'
+          },
+          {
+            targets: 3,
+            className: 'dt-head-center dt-body-center'
+          },
+          {
+            targets: 4,
+            className: 'dt-head-center dt-body-center'
+          },
+          {
+            targets: 5,
+            className: 'dt-head-center dt-body-center'
+          },
+          {
+            targets: 6,
+            className: 'dt-head-center dt-body-center'
+          },
+          {
+            targets: 7,
+            className: 'dt-head-center'
+          },
+          { "width": "32px", "targets": 0 },
+          { "width": "50px", "targets": 1 },
+          { "width": "85px", "targets": 2 },
+          { "width": "85px", "targets": 3 },
+          { "width": "85px", "targets": 4 },
+          { "width": "75px", "targets": 5 },
+          { "width": "85px", "targets": 6 },
+        ]
+      });
+      $('.dataTables_length').addClass('bs-select');
   });
+      
+});
 
   // $('#CodeGHalebModal').on('shown.bs.modal', function () {
   //   var tbl = $('#dtBasicExample').DataTable( {
@@ -263,46 +265,43 @@
     var selectedObj = ui.item;
   }
 
-  $(".sel-table>tbody").selectable({ filter: 'tr' });
+  $(".buttonID").click(function () {
+    //alert(this.id); // or alert($(this).attr('id'));
+    bid = this.id;
+    $.ajax({
+      url: '/orders/api/get_template/',
+      data: {
+        'bid': bid
+      },
+      dataType: 'json',
+      success: function (data) {
+        $.each(data, function (key, value) {
+          if (key == 'tj') {
+            $("#tool").val(value)
+          }
+          if (key == 'aj') {
+            $("#arz").val(value)
+          }
+          if (key == 'ej') {
+            $("#ertefa").val(value)
+          }
+          if (key == 'td') {
+            $("#tedad").val(value)
+          }
+          if (key == 'aaj') {
+            $("#tsh").val(value)
+          }
+          if (key == 'eej') {
+            $("#ash").val(value)
+          }
+          if (key == 'cga') {
+            $("#id_CodeGhaleb").val(value)
+          }
+        });
 
-
-    $(".buttonID").click(function() {
-        //alert(this.id); // or alert($(this).attr('id'));
-        bid = this.id;
-        $.ajax({
-        url: '/orders/api/get_template/',
-        data: {
-          'bid': bid
-        },
-        dataType: 'json',
-        success: function (data) {
-          $.each(data, function(key, value){
-            if (key == 'tj') {
-              $("#tool").val(value)
-            }
-            if (key == 'aj') {
-              $("#arz").val(value)
-            }
-            if (key == 'ej') {
-              $("#ertefa").val(value)
-            }
-            if (key == 'td') {
-              $("#tedad").val(value)
-            }
-            if (key == 'aaj') {
-              $("#tsh").val(value)
-            }
-            if (key == 'eej') {
-              $("#ash").val(value)
-            }               
-            if (key == 'cga') {
-              $("#id_CodeGhaleb").val(value)
-            }                        
-          });
-
-        }
-      });
+      }
     });
-  
+  });
+
 </script>
 {% endblock %}

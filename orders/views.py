@@ -1,11 +1,15 @@
-from django.shortcuts import render
-from .models import orders, customers, Material, DasteMahsool, Templates
-from .forms import Order_Form
-from jalali_date import datetime2jalali, date2jalali
-from django.shortcuts import HttpResponse, redirect, render
+import json
+from os.path import relpath
+
 from django.core import serializers
 from django.http import JsonResponse
-import json
+from django.shortcuts import HttpResponse, redirect, render
+from jalali_date import date2jalali, datetime2jalali
+from django.forms.models import model_to_dict
+
+from .forms import Order_Form
+from .models import DasteMahsool, Material, Templates, customers, orders
+
 
 # Create your views here.
 def Show_List(request):
@@ -23,9 +27,8 @@ def OrderF(request):
         return redirect('orders:orderlist')
     else:
         OrderForm = Order_Form()
-        TemplatesAll = Templates.objects.all()
         jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
-        return render(request, 'orders/order.html', {'order_form': OrderForm, 'TemplatesAll': TemplatesAll, 'JoinDateJalali': jalali_join})        
+        return render(request, 'orders/order.html', {'order_form': OrderForm, 'JoinDateJalali': jalali_join})        
 
 
 
@@ -80,4 +83,18 @@ def get_template(request):
   # #else:
   #   #data = 'fail'
   # mimetype = 'application/json'
-  return JsonResponse(results)         
+  return JsonResponse(results)     
+
+
+def TemplatesToJason(request):
+  if request.is_ajax():
+    q1 = request.GET.get('dastemahsool', '')
+    q1 = q1.replace("ي", "ی")
+    q1 = q1.replace("ك", "ک")
+
+    object_list = Templates.objects.all()
+    data = serializers.serialize('json', object_list)
+    print(data)
+  else:
+    data='fail'
+  return JsonResponse(data, safe=False)  
