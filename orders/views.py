@@ -9,8 +9,7 @@ from django.forms.models import model_to_dict
 
 from .forms import Order_Form
 from .models import DasteMahsool, Material, Templates, customers, orders
-
-
+from datatables_ajax.datatables import DjangoDatatablesServerProc
 # Create your views here.
 def Show_List(request):
         OrderList = orders.objects.all()
@@ -30,7 +29,10 @@ def OrderF(request):
         jalali_join = datetime2jalali(request.user.date_joined).strftime('%y/%m/%d _ %H:%M:%S')
         return render(request, 'orders/order.html', {'order_form': OrderForm, 'JoinDateJalali': jalali_join})        
 
-
+        # student_form = StudentForm(request.POST)
+        # if user_form.is_valid() and student_form.is_valid():
+        #     user_form.save()
+        #     student_form.save()
 
 
 def get_name_tafzili_shenavar(request):
@@ -66,7 +68,6 @@ def get_name_tafzili_shenavar(request):
   
 
 def get_template(request):
-  #if request.is_ajax():
   bid = request.GET.get('bid', '')
   tmp = Templates.objects.get(id=bid)
   results = {
@@ -78,11 +79,6 @@ def get_template(request):
         'eej': tmp.Arze_sheete_chapi,
         'cga': tmp.Code_ghalebe_asli,
     }
-    # data = JsonResponse(results)
-  #   print(data)
-  # #else:
-  #   #data = 'fail'
-  # mimetype = 'application/json'
   return JsonResponse(results)     
 
 
@@ -92,9 +88,9 @@ def TemplatesToJason(request):
     q1 = q1.replace("ي", "ی")
     q1 = q1.replace("ك", "ک")
 
-    object_list = Templates.objects.all()
-    data = serializers.serialize('json', object_list)
-    print(data)
+    object_list = Templates.objects.filter(Daste_mahsool=q1)
+    n = [{'id': blog.id, 'Code_ghalebe_asli': blog.Code_ghalebe_asli, 'Boresh_pish_az_Chap': blog.Boresh_pish_az_Chap, 'Toole_Sheete_Chapi': blog.Toole_Sheete_Chapi, 'Arze_sheete_chapi': blog.Arze_sheete_chapi, 'tedad_dar_ghaleb': blog.tedad_dar_ghaleb, 'Boresh_pas_az_chap': blog.Boresh_pas_az_chap, 'folder_link': blog.folder_link, 'Formoole_name_mahsool': blog.Formoole_name_mahsool} for blog in object_list]
+    data = {"data": list(n)}
   else:
     data='fail'
   return JsonResponse(data, safe=False)  

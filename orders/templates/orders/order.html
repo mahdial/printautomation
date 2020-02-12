@@ -104,8 +104,8 @@
         <table id="dtBasicExample" class="dataTableLayout table table-striped table-bordered table-sm" cellspacing="0">
           <thead>
             <tr>
-              <th class="th-sm">شماره
-              </th>
+              <th class="th-sm">نام
+              </th>              
               <th class="th-sm">کد قالب
               </th>
               <th class="th-sm">برش پیش از چاپ
@@ -120,14 +120,16 @@
               </th>
               <th class="th-sm">فایل
               </th>
+              <th class="th-sm">انتخاب
+              </th>                
             </tr>
           </thead>
           <tbody>
           </tbody>
           <tfoot>
             <tr>
-              <th class="th-sm">شماره
-              </th>
+              <th class="th-sm">نام
+              </th>              
               <th class="th-sm">کد قالب
               </th>
               <th class="th-sm">برش پیش از چاپ
@@ -142,6 +144,8 @@
               </th>
               <th class="th-sm">فایل
               </th>
+              <th class="th-sm">انتخاب
+              </th>              
             </tr>
           </tfoot>
         </table>
@@ -150,84 +154,100 @@
 
     <!-- Modal footer -->
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+      <button type="button" class="btn btn-secondary btn-view" data-dismiss="modal">بستن</button>
     </div>
   </div>
 </div>
 
 <script>
-  $(document).ready(function () {
+  $(document).ready(function () {  
+
     BindControls();
-  $('#id_Daste_Mahsool').focusout(function() {
-      $('#dtBasicExample').DataTable({
-        "processing": true,
-        "serverSide": true,      
-        "ajax": {
-          processData: true,
-               dataType: 'json',
-               "url": "/orders/api/templatestojason/",
-               dataSrc:"",
-                data: {
-                  dastemahsool: $('#id_Daste_Mahsool').val()
-                },
-        },
-        "columns": [
-          { "data": "id" },
-          { "data": "Code_ghalebe_asli" },
-          { "data": "Boresh_pish_az_Chap" },
-          { "data": "Toole_Sheete_Chapi" },
-          { "data": "Arze_sheete_chapi" },
-          { "data": "tedad_dar_ghaleb" },
-          { "data": "Boresh_pas_az_chap" },
-          { "data": "folder_link" },
-        ],
-        "autoWidth": false,
-        select: true,
-        "columnDefs": [
-          {
-            targets: 0,
-            className: 'dt-head-center dt-body-center'
-          },
-          {
-            targets: 1,
-            className: 'dt-head-center dt-body-center'
-          },
-          {
-            targets: 2,
-            className: 'dt-head-center dt-body-center'
-          },
-          {
-            targets: 3,
-            className: 'dt-head-center dt-body-center'
-          },
-          {
-            targets: 4,
-            className: 'dt-head-center dt-body-center'
-          },
-          {
-            targets: 5,
-            className: 'dt-head-center dt-body-center'
-          },
-          {
-            targets: 6,
-            className: 'dt-head-center dt-body-center'
-          },
-          {
-            targets: 7,
-            className: 'dt-head-center'
-          },
-          { "width": "32px", "targets": 0 },
-          { "width": "50px", "targets": 1 },
-          { "width": "85px", "targets": 2 },
-          { "width": "85px", "targets": 3 },
-          { "width": "85px", "targets": 4 },
-          { "width": "75px", "targets": 5 },
-          { "width": "85px", "targets": 6 },
-        ]
-      });
-      $('.dataTables_length').addClass('bs-select');
+
+    $('#CodeGHalebModal').on('shown.bs.modal', function (e) {
+        $('#dtBasicExample').dataTable().fnClearTable();
+        $('#dtBasicExample').dataTable().fnDestroy();
+        var table = $('#dtBasicExample').DataTable({  
+            "ajax": {
+                  destroy: true,
+                  processData: true,
+                  dataType: 'json',
+                  dataSrc:"data",
+                  data: {
+                      dastemahsool: $('#id_Daste_Mahsool').val()
+                    },               
+                  "url": "/orders/api/templatestojason/",                          
+            },
+            "processing": true,  
+            "columns": [
+              { "data": "Formoole_name_mahsool" },
+              { "data": "Code_ghalebe_asli" },
+              { "data": "Boresh_pish_az_Chap" },
+              { "data": "Toole_Sheete_Chapi" },
+              { "data": "Arze_sheete_chapi" },
+              { "data": "tedad_dar_ghaleb" },
+              { "data": "Boresh_pas_az_chap" },
+              { "data": "folder_link" },
+              { "data": null,
+          "defaultContent": 
+             '<button class="btn-view btn btn-secondary" data-dismiss="modal" type="button">انتخاب</button>'
+              },              
+            ],
+            "autoWidth": false,
+            select: true,
+            "columnDefs": [
+              {
+                targets: 0,
+                className: 'dt-head-center dt-body-center'
+              },
+              {
+                targets: 1,
+                className: 'dt-head-center dt-body-center'
+              },
+              {
+                targets: 2,
+                className: 'dt-head-center dt-body-center'
+              },
+              {
+                targets: 3,
+                className: 'dt-head-center dt-body-center'
+              },
+              {
+                targets: 4,
+                className: 'dt-head-center dt-body-center'
+              },
+              {
+                targets: 5,
+                className: 'dt-head-center dt-body-center'
+              },
+              {
+                targets: 6,
+                className: 'dt-head-center dt-body-center'
+              },              
+              {
+                targets: 7,
+                className: 'dt-head-center dt-body-center'
+              },
+              {
+                targets: 8,
+                className: 'dt-head-center dt-body-center'
+              },
+              { "width": "50px", "targets": 1 },
+              { "width": "85px", "targets": 2 },
+              { "width": "85px", "targets": 3 },
+              { "width": "85px", "targets": 4 },
+              { "width": "75px", "targets": 5 },
+              { "width": "85px", "targets": 6 },
+              { "width": "50px", "targets": 8 },
+            ]
+          });
+          $('#dtBasicExample tbody').on( 'click', '.btn-view', function (ث) {
+              var sd = table.row( $(this).parents('tr') ).data();
+              btnid(sd.id);
+          } );          
+          $('.dataTables_length').addClass('bs-select');
   });
-      
+
 });
 
   // $('#CodeGHalebModal').on('shown.bs.modal', function () {
@@ -237,37 +257,9 @@
   //   } );    
   //   tbl.columns.adjust().draw();
   // });    
-
-  function BindControls() {
-    src = "/orders/api/get_places/"
-    $(".AutoComp").autocomplete({
-      source: function (request, response) {
-        $.ajax({
-          url: src,
-          dataType: "json",
-          data: {
-            term: request.term,
-            elementname: $(this.element).prop("id")
-          },
-          success: function (data) {
-            response(data);
-          }
-        });
-      },
-      select: function (event, ui) { //item selected
-        AutoCompleteSelectHandler(event, ui)
-      },
-      minLength: 1,
-    });
-  };
-
-  function AutoCompleteSelectHandler(event, ui) {
-    var selectedObj = ui.item;
-  }
-
-  $(".buttonID").click(function () {
+  function btnid(bi) {
     //alert(this.id); // or alert($(this).attr('id'));
-    bid = this.id;
+    bid = bi;
     $.ajax({
       url: '/orders/api/get_template/',
       data: {
@@ -301,7 +293,35 @@
 
       }
     });
-  });
+  };  
+
+
+  function BindControls() {
+    src = "/orders/api/get_places/"
+    $(".AutoComp").autocomplete({
+      source: function (request, response) {
+        $.ajax({
+          url: src,
+          dataType: "json",
+          data: {
+            term: request.term,
+            elementname: $(this.element).prop("id")
+          },
+          success: function (data) {
+            response(data);
+          }
+        });
+      },
+      select: function (event, ui) { //item selected
+        AutoCompleteSelectHandler(event, ui)
+      },
+      minLength: 1,
+    });
+  };
+
+  function AutoCompleteSelectHandler(event, ui) {
+    var selectedObj = ui.item;
+  }
 
 </script>
 {% endblock %}
